@@ -1,0 +1,51 @@
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+*.lst
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.launch
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+*.bin
+
+# Misc
+*.map
+*.m
+*.png
+
+# Vagrant directory
+.vagrant/
+
+*.rej
+
+# Include makefiles
+!Makefile
+*~
+
+# Libraries
+/lib
+/Output
+.settings/
+
+# Scripts .venv
+
+Scripts/encrypt/.venv/

@@ -1,0 +1,66 @@
+{
+    "version": "0.2.0",
+    "projectName": "stm32_guitart_tuner",
+    "configurations": [
+        {
+            "name": "📘 STlink App launch",
+            "preLaunchTask": "🛠 Build App",
+            "postDebugTask": "ST_debug_fix",
+            "request": "launch",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "servertype": "openocd",
+            "executable": "${workspaceRoot}/${config:app_output_path_abs}/${config:app_file_name}.elf",
+            "svdFile": "${config:stm_svd_cfg}",
+            "configFiles": [
+                "${config:ocd_stlink_cfg}",
+                "${config:ocd_stm_cfg}"
+            ],
+            "runToMain": true
+        },
+        {
+            "name": "📘🧷 STlink attach",
+            "postDebugTask": "ST_debug_fix",
+            "request": "attach",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "servertype": "openocd",
+            "executable": "${workspaceRoot}/${config:app_output_path_abs}/${config:app_file_name}.elf",
+            "svdFile": "${config:stm_svd_cfg}",
+            "configFiles": [
+                "${config:ocd_stlink_cfg}",
+                "${config:ocd_stm_cfg}"
+            ]
+        },
+        {
+            "name": "📕 JLink App launch",
+            "preLaunchTask": "🛠 Build App",
+            "postDebugTask": "JL_debug_fix",
+            "request": "launch",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "servertype": "openocd",
+            "executable": "${workspaceRoot}/${config:app_output_path_abs}/${config:app_file_name}.elf",
+            "svdFile": "${config:stm_svd_cfg}",
+            "configFiles": [
+                "${config:ocd_jlink_cfg}",
+                "${config:ocd_stm_cfg}"
+            ],
+            "runToMain": true
+        },
+        {
+            "name": "📕🧷 JLink attach",
+            "postDebugTask": "JL_debug_fix",
+            "request": "attach",
+            "type": "cortex-debug",
+            "cwd": "${workspaceRoot}",
+            "servertype": "openocd",
+            "executable": "${workspaceRoot}/${config:app_output_path_abs}/${config:app_file_name}.elf",
+            "svdFile": "${config:stm_svd_cfg}",
+            "configFiles": [
+                "${config:ocd_jlink_cfg}",
+                "${config:ocd_stm_cfg}"
+            ]
+        }
+    ]
+}

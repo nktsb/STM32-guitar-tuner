@@ -1,0 +1,30 @@
+{
+    "terminal.integrated.profiles.windows": {
+        "Git Bash": {
+            "source": "Git Bash",
+        }
+    },
+    "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+    "output_path_name": "Output",
+    "scripts_path_name": "Scripts",
+    
+    "app_project_path": ".",
+    "app_file_name": "STM32-guitar-tuner",
+    "app_scripts_path_abs": "${config:app_project_path}/${config:scripts_path_name}",
+    "app_build_script": "${config:app_scripts_path_abs}/build/build_app.sh",
+    "app_output_path_make": "${config:output_path_name}/App",
+    "app_output_path_abs": "${config:app_project_path}/${config:output_path_name}/App",
+    "app_cmake_list_make": "${config:scripts_path_name}/build/app_sources.mk",
+
+    "artifact_path_abs": "${config:app_project_path}/${config:output_path_name}/Artifacts",
+
+    "openocd_cfg": "${config:app_project_path}/OCD",
+    "openocd": "openocd",
+    "ocd_stlink_cfg": "interface/stlink.cfg",
+    "ocd_jlink_cfg": "${config:openocd_cfg}/jlink-swd.cfg",
+    "ocd_stm_cfg": "target/stm32f0x.cfg",
+    "cortex-debug.gdbPath": "arm-none-eabi-gdb",
+    "debug_fix_script": "${config:app_scripts_path_abs}/debug/debug_fix.sh",
+    "stm_svd_cfg": "${config:openocd_cfg}/STM32F0x0.svd"
+}

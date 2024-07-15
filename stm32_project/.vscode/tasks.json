@@ -1,0 +1,239 @@
+/*
+ * -----------------------------------------------------------------------------
+ * Project       : STM32-guitar-tuner
+ * File          : tasks.json
+ * Author        : nktsb
+ * Created on    : 11.07.2024
+ * GitHub        : https://github.com/nktsb/STM32-guitar-tuner
+ * -----------------------------------------------------------------------------
+ * Copyright (c) 2024 nktsb
+ * All rights reserved.
+ * -----------------------------------------------------------------------------
+ */
+
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "GIT_submodules",
+            "type": "shell",
+            "command": "git",
+            "args": [
+                "submodule",
+                "update",
+                "--init",
+                "--recursive"
+            ],
+            "runOptions": {
+                "runOn": "folderOpen",
+            },
+        },
+        {
+            "label": "🛠 Build App",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [   
+                        "${config:app_build_script}", 
+                        "${config:app_project_path}",
+                        "build", 
+                        "-j4",
+                        "${config:app_output_path_make}",
+                        "${config:app_file_name}",
+                        "${config:app_cmake_list_make}",
+                        "${config:artifact_path_abs}",
+                    ]
+        },
+        {
+            "label": "🗑 Clean all",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "clean",
+                        "${config:app_output_path_abs}",
+                        "${config:artifact_path_abs}",
+                    ]
+        },
+        {
+            "label": "📘 🔵 ST App erase + flash",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "dependsOrder": "sequence",
+            "dependsOn": ["🛠 Build App", "🧻 🔵 ST App erase"],
+            "args": [
+                        "${config:app_build_script}", 
+                        "${config:app_project_path}",
+                        "flash", 
+                        "-j4", 
+                        "${config:artifact_path_abs}", 
+                        "${config:app_file_name}",
+                        "${config:openocd}",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🔒 🔵 ST Lock",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "lock",
+                        "${config:openocd}",
+                        "${config:openocd_cfg}",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🔑 🔵 ST Unlock",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "unlock",
+                        "${config:openocd}",
+                        "${config:openocd_cfg}",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🌀 🔵 ST Reset",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "reset",
+                        "${config:openocd}",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "📕 🔴 JL App erase + flash",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "dependsOrder": "sequence",
+            "dependsOn": ["🛠 Build App", "🧻 🔴 JL App erase"],
+            "args": [
+                        "${config:app_build_script}", 
+                        "${config:app_project_path}",
+                        "flash", 
+                        "-j4", 
+                        "${config:artifact_path_abs}", 
+                        "${config:app_file_name}",
+                        "${config:openocd}",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🔒 🔴 JL Lock",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "lock",
+                        "${config:openocd}",
+                        "${config:openocd_cfg}",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🔑 🔴 JL Unlock",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "unlock",
+                        "${config:openocd}",
+                        "${config:openocd_cfg}",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🌀 🔴 JL Reset",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "reset",
+                        "${config:openocd}",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🧻 🔵 ST App erase",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "erase",
+                        "${config:openocd}",
+                        "0",
+                        "last",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "🧻 🔴 JL App erase",
+            "group": "build",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:app_build_script}",
+                        "${config:app_project_path}",
+                        "erase",
+                        "${config:openocd}",
+                        "8",
+                        "last",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "JL_debug_fix",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:debug_fix_script}",
+                        "${config:ocd_jlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        },
+        {
+            "label": "ST_debug_fix",
+            "type": "shell",
+            "command": "bash",
+            "args": [
+                        "${config:debug_fix_script}",
+                        "${config:ocd_stlink_cfg}",
+                        "${config:ocd_stm_cfg}"
+                    ]
+        }
+    ]
+}

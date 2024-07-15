@@ -1,0 +1,23 @@
+{
+    "configurations": [
+        {
+            "name": "Oxygen",
+            "includePath": [
+                "${workspaceFolder}/Core/Inc**",
+                "${workspaceFolder}/Core/Inc/hardware**",
+                "${workspaceFolder}/Core/Inc/tuner_components**",
+                "${workspaceFolder}/Core/Inc/utils**",
+                "${workspaceFolder}/Drivers/CMSIS/Include**",
+                "${workspaceFolder}/Drivers/CMSIS/Device/ST/STM32F0xx/Include**",
+                "${workspaceFolder}/Drivers/STM32F0xx_HAL_Driver/Inc**",
+            ],
+            "defines": [
+                "STM32F042xx"
+            ],
+            "intelliSenseMode": "linux-gcc-x64",
+            "cStandard": "c11",
+            "cppStandard": "c++20"
+        }
+    ],
+    "version": 4
+}
